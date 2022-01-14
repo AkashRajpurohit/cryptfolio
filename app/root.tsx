@@ -1,0 +1,58 @@
+import {
+  Links,
+  LinksFunction,
+  LiveReload,
+  Meta,
+  MetaFunction,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useCatch,
+} from 'remix';
+import twStyles from './tailwind.css';
+
+export const links: LinksFunction = () => [
+  { rel: 'stylesheet', href: twStyles },
+];
+
+export const meta: MetaFunction = () => {
+  return { title: 'Crypto Portfolio' };
+};
+
+export default function App() {
+  return (
+    <html lang='en'>
+      <head>
+        <meta charSet='utf-8' />
+        <meta name='viewport' content='width=device-width,initial-scale=1' />
+        <Meta />
+        <Links />
+      </head>
+      <body className='bg-slate-200 dark:bg-slate-900 text-slate-900 dark:text-slate-50 max-w-5xl mx-auto px-8 py-10'>
+        <Outlet />
+        <ScrollRestoration />
+        <Scripts />
+        {process.env.NODE_ENV === 'development' && <LiveReload />}
+      </body>
+    </html>
+  );
+}
+
+export function CatchBoundary() {
+  const caught = useCatch();
+  return (
+    <html>
+      <head>
+        <title>Oops!</title>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <h1>
+          {caught.status} {caught.statusText}
+        </h1>
+        <Scripts />
+      </body>
+    </html>
+  );
+}
