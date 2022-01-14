@@ -1,7 +1,8 @@
 import { ArrowSmDownIcon, ArrowSmUpIcon } from '@heroicons/react/solid';
-import { FunctionComponent } from 'react';
-import { IPortfolio } from '~/lib/types';
+import { FunctionComponent, useState } from 'react';
+import { ICoin, IPortfolio } from '~/lib/types';
 import { classNames, formatSymbolName, formatToNumber } from '~/lib/utils';
+import TransactionModal from './TransactionModal';
 
 interface IAssetsTableProps {
   portfolio: IPortfolio;
@@ -10,6 +11,19 @@ interface IAssetsTableProps {
 const AssetsTable: FunctionComponent<IAssetsTableProps> = ({
   portfolio,
 }): JSX.Element => {
+  const [open, setOpen] = useState(false);
+  const [coin, setCoin] = useState<ICoin | null>(null);
+
+  const handleOnRowClick = (coin: ICoin): void => {
+    setOpen(true);
+    setCoin(coin);
+  };
+
+  const onModalClose = (): void => {
+    setOpen(false);
+    setCoin(null);
+  };
+
   return (
     <div className='flex flex-col mt-4'>
       <div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
@@ -50,7 +64,7 @@ const AssetsTable: FunctionComponent<IAssetsTableProps> = ({
                   </th>
                 </tr>
               </thead>
-              <tbody className='bg-primary-50 dark:bg-primary-100 divide-y divide-gray-200'>
+              <tbody className='bg-primary-50 dark:bg-primary-100 divide-y divide-gray-200 cursor-pointer'>
                 {Object.entries(portfolio).map(([symbol, coin]) => (
                   <tr
                     key={symbol}
@@ -59,6 +73,7 @@ const AssetsTable: FunctionComponent<IAssetsTableProps> = ({
                         ? 'bg-profit-50 dark:bg-profit-100'
                         : 'bg-loss-50 dark:bg-loss-100'
                     }
+                    onClick={(): void => handleOnRowClick(coin)}
                   >
                     <td className='px-6 py-4 whitespace-nowrap'>
                       <div className='flex items-center'>
@@ -136,6 +151,7 @@ const AssetsTable: FunctionComponent<IAssetsTableProps> = ({
           </div>
         </div>
       </div>
+      <TransactionModal coin={coin} open={open} onModalClose={onModalClose} />
     </div>
   );
 };
