@@ -1,18 +1,31 @@
 import { FunctionComponent } from 'react';
-import { json, LoaderFunction, useLoaderData } from 'remix';
+import { json, LoaderFunction, redirect, useLoaderData } from 'remix';
 import AssetsTable from '~/components/AssetsTable';
 import DashboardStats from '~/components/DashboardStats';
 import { getPortfolio } from '~/lib/binance';
 import { IPortfolio } from '~/lib/types';
+import { commitSession, getSession } from '~/sessions';
 
 interface IDashboardLoaderData {
   portfolio: IPortfolio;
   usdtBalance: number | string;
 }
 
-export const loader: LoaderFunction = async () => {
+export const loader: LoaderFunction = async ({ request }) => {
+  const session = await getSession(request.headers.get('Cookie'));
+  if (!session.has('userId')) {
+    session.flash('error', 'You must be logged in to view this page.');
+    return redirect('/', {
+      headers: {
+        'Set-Cookie': await commitSession(session),
+      },
+    });
+  }
+
+  const userId = session.get('userId');
+
   const { portfolio, usdtBalance } = await getPortfolio({
-    userId: 'password',
+    userId,
   });
   return json({ portfolio, usdtBalance });
 };
