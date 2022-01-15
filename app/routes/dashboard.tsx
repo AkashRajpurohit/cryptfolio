@@ -1,6 +1,12 @@
 import { LogoutIcon } from '@heroicons/react/solid';
 import { FunctionComponent } from 'react';
-import { Form, json, LoaderFunction, redirect, useLoaderData } from 'remix';
+import {
+  json,
+  LoaderFunction,
+  redirect,
+  useFetcher,
+  useLoaderData,
+} from 'remix';
 import AssetsTable from '~/components/AssetsTable';
 import DashboardStats from '~/components/DashboardStats';
 import { getPortfolio } from '~/lib/binance';
@@ -35,12 +41,14 @@ export const loader: LoaderFunction = async ({ request }) => {
 const Dashboard: FunctionComponent = (): JSX.Element => {
   const { portfolio, usdtBalance, userId } =
     useLoaderData<IDashboardLoaderData>();
+
+  const logout = useFetcher();
   return (
     <div>
       <div className='flex flex-row justify-between'>
         <h1 className='text-xl'>Welcome, {userId}!</h1>
         <div>
-          <Form method='post' action='/logout'>
+          <logout.Form method='post' action='/logout'>
             <button
               type='submit'
               className='bg-red-500 hover:bg-red-700 text-white font-bold p-2 rounded-full ring-red-500 ring-offset-1'
@@ -49,7 +57,7 @@ const Dashboard: FunctionComponent = (): JSX.Element => {
             >
               <LogoutIcon className='h-5 w-5' />
             </button>
-          </Form>
+          </logout.Form>
         </div>
       </div>
       <DashboardStats portfolio={portfolio} usdtBalance={usdtBalance} />
