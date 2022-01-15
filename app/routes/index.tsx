@@ -10,12 +10,12 @@ import {
 import SigninForm from '~/components/SigninForm';
 import SimpleAlert from '~/components/SimpleAlert';
 import { validateCredentials } from '~/lib/auth';
-import { commitSession, getSession } from '~/sessions';
+import { commitAuthSession, getAuthSession } from '~/sessions';
 
 interface IHomeProps {}
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const session = await getSession(request.headers.get('Cookie'));
+  const session = await getAuthSession(request.headers.get('Cookie'));
 
   if (session.has('userId')) {
     return redirect('/dashboard');
@@ -25,13 +25,13 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   return json(data, {
     headers: {
-      'Set-Cookie': await commitSession(session),
+      'Set-Cookie': await commitAuthSession(session),
     },
   });
 };
 
 export const action: ActionFunction = async ({ request }) => {
-  const session = await getSession(request.headers.get('Cookie'));
+  const session = await getAuthSession(request.headers.get('Cookie'));
 
   const form = await request.formData();
   const username = form.get('username') as string;
@@ -45,7 +45,7 @@ export const action: ActionFunction = async ({ request }) => {
     // Redirect back to the home page with errors.
     return redirect('/', {
       headers: {
-        'Set-Cookie': await commitSession(session),
+        'Set-Cookie': await commitAuthSession(session),
       },
     });
   }
@@ -55,7 +55,7 @@ export const action: ActionFunction = async ({ request }) => {
   // Login succeeded, send them to the dashboard page.
   return redirect('/dashboard', {
     headers: {
-      'Set-Cookie': await commitSession(session),
+      'Set-Cookie': await commitAuthSession(session),
     },
   });
 };

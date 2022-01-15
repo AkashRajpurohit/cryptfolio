@@ -59,5 +59,6 @@ export const formatDate = (date: number) => {
   return dayjs(date).format('MMM DD, YYYY, hh:mm:ss A');
 };
 
-export const COOKIE_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 30; // 30 days
+export const AUTH_COOKIE_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 30; // 30 days
+export const THEME_COOKIE_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 365; // 1 year
 export const REFRESH_INTERVAL = 1000 * 15; // 15 seconds

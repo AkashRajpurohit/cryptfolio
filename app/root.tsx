@@ -1,16 +1,20 @@
 import {
+  json,
   Links,
   LinksFunction,
   LiveReload,
+  LoaderFunction,
   Meta,
   MetaFunction,
   Outlet,
   Scripts,
   ScrollRestoration,
   useCatch,
+  useLoaderData,
 } from 'remix';
-import { ThemeProvider, useTheme } from './components/ThemeProvider';
-import twStyles from './tailwind.css';
+import { Theme, ThemeProvider, useTheme } from '~/components/ThemeProvider';
+import { getThemeSession } from '~/sessions';
+import twStyles from '~/tailwind.css';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: twStyles },
@@ -36,6 +40,12 @@ export const meta: MetaFunction = () => {
   return { title: 'Crypto Portfolio' };
 };
 
+export const loader: LoaderFunction = async ({ request }) => {
+  const themeSession = await getThemeSession(request.headers.get('Cookie'));
+
+  return json({ theme: themeSession.get('theme') || 'dark' });
+};
+
 export function App() {
   const { theme } = useTheme();
   return (
@@ -57,8 +67,9 @@ export function App() {
 }
 
 export default function AppWithProviders() {
+  const { theme } = useLoaderData<{ theme: Theme }>();
   return (
-    <ThemeProvider>
+    <ThemeProvider specifiedTheme={theme}>
       <App />
     </ThemeProvider>
   );

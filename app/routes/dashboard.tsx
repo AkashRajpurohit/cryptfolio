@@ -13,7 +13,7 @@ import useInterval from '~/hooks/useInterval';
 import { getPortfolio } from '~/lib/binance';
 import { IPortfolio } from '~/lib/types';
 import { classNames, REFRESH_INTERVAL } from '~/lib/utils';
-import { commitSession, getSession } from '~/sessions';
+import { commitAuthSession, getAuthSession } from '~/sessions';
 
 interface IDashboardLoaderData {
   portfolio: IPortfolio;
@@ -22,12 +22,12 @@ interface IDashboardLoaderData {
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const session = await getSession(request.headers.get('Cookie'));
+  const session = await getAuthSession(request.headers.get('Cookie'));
   if (!session.has('userId')) {
     session.flash('error', 'You must be logged in first.');
     return redirect('/', {
       headers: {
-        'Set-Cookie': await commitSession(session),
+        'Set-Cookie': await commitAuthSession(session),
       },
     });
   }
@@ -93,7 +93,7 @@ const Dashboard: FunctionComponent = (): JSX.Element => {
               <SunIcon className='h-5 w-5' />
             )}
           </button>
-          <logout.Form method='post' action='/logout'>
+          <logout.Form method='post' action='/action/logout'>
             <button
               type='submit'
               className='bg-red-500 hover:bg-red-700 text-white font-bold p-2 rounded-full ring-red-500 ring-offset-1'
