@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { twMerge } from 'tailwind-merge';
 import { ICoin, IDeposit, IPortfolio, ITrade } from './types';
 
@@ -52,6 +53,10 @@ export const getTotalInvestedUSDTValueOfPortfolio = (portfolio: IPortfolio) => {
 
 export const formatSymbolName = (symbol: string) => {
   return symbol.replace('USDT', '');
+};
+
+export const formatDate = (date: number) => {
+  return dayjs(date).format('MMM DD, YYYY, hh:mm:ss A');
 };
 
 export const COOKIE_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 30; // 30 days

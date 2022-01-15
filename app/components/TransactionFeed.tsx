@@ -5,7 +5,7 @@ import {
 } from '@heroicons/react/solid';
 import React, { FunctionComponent } from 'react';
 import { ICoin } from '~/lib/types';
-import { classNames, formatSymbolName } from '~/lib/utils';
+import { classNames, formatDate, formatSymbolName } from '~/lib/utils';
 
 interface ITransactionFeedProps {
   coin: ICoin | null;
@@ -64,9 +64,9 @@ const TransactionFeed: FunctionComponent<ITransactionFeedProps> = ({
                       <span className='font-bold'>${trade.usdtQuantity}</span>
                     </p>
                   </div>
-                  <div className='text-right text-sm whitespace-nowrap text-gray-500'>
+                  <div className='text-right text-sm whitespace-nowrap text-gray-500 font-semibold'>
                     <time dateTime={new Date(trade.time).toDateString()}>
-                      {new Date(trade.time).toDateString()}
+                      {formatDate(trade.time)}
                     </time>
                   </div>
                 </div>
@@ -106,9 +106,9 @@ const TransactionFeed: FunctionComponent<ITransactionFeedProps> = ({
                       </span>{' '}
                     </p>
                   </div>
-                  <div className='text-right text-sm whitespace-nowrap text-gray-500'>
+                  <div className='text-right text-sm whitespace-nowrap text-gray-500 font-semibold'>
                     <time dateTime={new Date(deposit.time).toDateString()}>
-                      {new Date(deposit.time).toDateString()}
+                      {formatDate(deposit.time)}
                     </time>
                   </div>
                 </div>
