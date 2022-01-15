@@ -36,8 +36,6 @@ export const classNames = (...classes: string[]) => {
   return twMerge(classes.filter(Boolean).join(' '));
 };
 
-export const COOKIE_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 30; // 30 days
-
 export const getCurrentUSDTValueOfPortfolio = (portfolio: IPortfolio) => {
   return Object.values(portfolio).reduce(
     (acc, coin: ICoin) => acc + (coin.currentValue || 0),
@@ -55,3 +53,6 @@ export const getTotalInvestedUSDTValueOfPortfolio = (portfolio: IPortfolio) => {
 export const formatSymbolName = (symbol: string) => {
   return symbol.replace('USDT', '');
 };
+
+export const COOKIE_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 30; // 30 days
+export const REFRESH_INTERVAL = 1000 * 15; // 15 seconds

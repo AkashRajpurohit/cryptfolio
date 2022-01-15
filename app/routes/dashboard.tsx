@@ -1,16 +1,12 @@
-import { LogoutIcon } from '@heroicons/react/solid';
-import { FunctionComponent } from 'react';
-import {
-  json,
-  LoaderFunction,
-  redirect,
-  useFetcher,
-  useLoaderData,
-} from 'remix';
+import { LogoutIcon, RefreshIcon } from '@heroicons/react/solid';
+import { FunctionComponent, useEffect } from 'react';
+import { json, LoaderFunction, redirect, useFetcher } from 'remix';
 import AssetsTable from '~/components/AssetsTable';
 import DashboardStats from '~/components/DashboardStats';
+import useInterval from '~/hooks/useInterval';
 import { getPortfolio } from '~/lib/binance';
 import { IPortfolio } from '~/lib/types';
+import { classNames, REFRESH_INTERVAL } from '~/lib/utils';
 import { commitSession, getSession } from '~/sessions';
 
 interface IDashboardLoaderData {
@@ -39,15 +35,47 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 const Dashboard: FunctionComponent = (): JSX.Element => {
-  const { portfolio, usdtBalance, userId } =
-    useLoaderData<IDashboardLoaderData>();
-
   const logout = useFetcher();
+  const dashboard = useFetcher<IDashboardLoaderData>();
+  const data = dashboard.data;
+
+  useEffect(() => {
+    dashboard.load('/dashboard');
+  }, []);
+
+  // Periodically refresh the dashboard data.
+  useInterval(() => {
+    dashboard.load('/dashboard');
+  }, REFRESH_INTERVAL);
+
+  if (!data && dashboard.state === 'loading') {
+    return (
+      <div className='min-h-[80vh] flex flex-col justify-center items-center'>
+        <RefreshIcon className='h-16 w-16 animate-spin' />
+        <span className='text-xl font-semibold'>Hang on a bit!!</span>
+      </div>
+    );
+  }
+  if (!data) return <></>;
+
+  const { portfolio, usdtBalance, userId } = data;
+
   return (
     <div>
       <div className='flex flex-row justify-between'>
         <h1 className='text-xl'>Welcome, {userId}!</h1>
-        <div>
+        <div className='flex flex-row items-center gap-4'>
+          <span className='text-sm flex flex-row items-center gap-4'>
+            {dashboard.state === 'loading' && (
+              <span className='hidden md:block'>Refreshing...</span>
+            )}
+            <RefreshIcon
+              className={classNames(
+                'h-5 w-5',
+                dashboard.state === 'loading' ? 'animate-spin' : 'animate-none'
+              )}
+            />
+          </span>
           <logout.Form method='post' action='/logout'>
             <button
               type='submit'
