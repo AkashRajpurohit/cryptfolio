@@ -107,8 +107,8 @@ const AssetsTable: FunctionComponent<IAssetsTableProps> = ({
                         {formatSymbolName(coin.symbol)}
                       </div>
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap'>
-                      <span className='px-2 inline-flex text-sm leading-5 font-semibold text-slate-800 '>
+                    <td className='px-6 py-4 whitespace-nowrap hidden md:block'>
+                      <span className='px-2 inline-flex text-sm leading-5 font-semibold text-slate-800'>
                         ${formatToNumber(coin.averageBuyPrice || 0, 4)}
                       </span>
                     </td>
