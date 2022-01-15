@@ -45,7 +45,7 @@ const Dashboard: FunctionComponent = (): JSX.Element => {
 
   // Periodically refresh the dashboard data.
   useInterval(() => {
-    // dashboard.load('/dashboard');
+    dashboard.load('/dashboard');
   }, REFRESH_INTERVAL);
 
   if (!data && dashboard.state === 'loading') {

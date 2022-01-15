@@ -13,6 +13,21 @@ import twStyles from './tailwind.css';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: twStyles },
+  { rel: 'favicon', href: '/favicons/favicon.ico' },
+  { rel: 'manifest', href: '/site.webmanifest' },
+  { rel: 'apple-touch-icon', href: '/favicons/apple-touch-icon.png' },
+  {
+    rel: 'icon',
+    type: 'image/png',
+    sizes: '32x32',
+    href: '/favicons/favicon-32x32.png',
+  },
+  {
+    rel: 'icon',
+    type: 'image/png',
+    sizes: '16x16',
+    href: '/favicons/favicon-16x16.png',
+  },
 ];
 
 export const meta: MetaFunction = () => {
