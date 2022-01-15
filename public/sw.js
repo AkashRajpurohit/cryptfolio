@@ -7,14 +7,13 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Only handle requests to the same origin
-  if (url.origin !== location.origin) {
-    return;
-  }
-
   // If the request is for the favicons, fonts, or the build files (which are hashed in the name)
   // then return the cached version
-  if (url.pathname.match(/\/(favicons\/.*\.*|fonts|build\/.*\.js)/)) {
+  // Additionally cache the cryptoicon-api requests which we use for the icons, so that we can burden less on the 3rd party service
+  if (
+    url.pathname.match(/\/(favicons\/.*\.*|fonts|build\/.*\.js)/) ||
+    url.hostname === 'cryptoicon-api.vercel.app'
+  ) {
     event.respondWith(
       // We will open the assets cache
       caches.open('assets').then(async (cache) => {
