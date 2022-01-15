@@ -1,18 +1,11 @@
 import { LogoutIcon } from '@heroicons/react/solid';
 import { FunctionComponent } from 'react';
-import {
-  ActionFunction,
-  Form,
-  json,
-  LoaderFunction,
-  redirect,
-  useLoaderData,
-} from 'remix';
+import { Form, json, LoaderFunction, redirect, useLoaderData } from 'remix';
 import AssetsTable from '~/components/AssetsTable';
 import DashboardStats from '~/components/DashboardStats';
 import { getPortfolio } from '~/lib/binance';
 import { IPortfolio } from '~/lib/types';
-import { commitSession, destroySession, getSession } from '~/sessions';
+import { commitSession, getSession } from '~/sessions';
 
 interface IDashboardLoaderData {
   portfolio: IPortfolio;
@@ -39,15 +32,6 @@ export const loader: LoaderFunction = async ({ request }) => {
   return json({ portfolio, usdtBalance, userId });
 };
 
-export const action: ActionFunction = async ({ request }) => {
-  const session = await getSession(request.headers.get('Cookie'));
-  return redirect('/', {
-    headers: {
-      'Set-Cookie': await destroySession(session),
-    },
-  });
-};
-
 const Dashboard: FunctionComponent = (): JSX.Element => {
   const { portfolio, usdtBalance, userId } =
     useLoaderData<IDashboardLoaderData>();
@@ -56,7 +40,7 @@ const Dashboard: FunctionComponent = (): JSX.Element => {
       <div className='flex flex-row justify-between'>
         <h1 className='text-xl'>Welcome, {userId}!</h1>
         <div>
-          <Form method='post'>
+          <Form method='post' action='/logout'>
             <button
               type='submit'
               className='bg-red-500 hover:bg-red-700 text-white font-bold p-2 rounded-full ring-red-500 ring-offset-1'
