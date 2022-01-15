@@ -28,7 +28,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className='bg-slate-200 dark:bg-slate-900 text-slate-900 dark:text-slate-50 max-w-5xl mx-auto px-8 py-10'>
+      <body className='bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-50 max-w-5xl mx-auto px-8 py-10'>
         <Outlet />
         <ScrollRestoration />
         <Scripts />

@@ -38,8 +38,8 @@ const DashboardStats: FunctionComponent<IDashboardStats> = ({
         className={classNames(
           'mt-5 grid grid-cols-1 rounded-lg bg-primary-50 dark:bg-primary-800 overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-2 md:divide-y-0 md:divide-x',
           changeType === 'increase'
-            ? 'bg-profit-50 dark:bg-profit-800'
-            : 'bg-loss-50 dark:bg-loss-800'
+            ? 'bg-profit-200 dark:bg-profit-800'
+            : 'bg-loss-200 dark:bg-loss-800'
         )}
       >
         <div className='px-4 py-5 sm:p-6'>
