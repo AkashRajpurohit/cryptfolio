@@ -8,6 +8,7 @@ import {
   useLoaderData,
 } from 'remix';
 import SigninForm from '~/components/SigninForm';
+import SimpleAlert from '~/components/SimpleAlert';
 import { validateCredentials } from '~/lib/auth';
 import { commitSession, getSession } from '~/sessions';
 
@@ -39,7 +40,7 @@ export const action: ActionFunction = async ({ request }) => {
   const userId = await validateCredentials({ username, password });
 
   if (userId === null) {
-    session.flash('error', 'Invalid username/password');
+    session.flash('error', 'Invalid Username / Password');
 
     // Redirect back to the home page with errors.
     return redirect('/', {
@@ -61,7 +62,6 @@ export const action: ActionFunction = async ({ request }) => {
 
 const Home: FunctionComponent<IHomeProps> = (): JSX.Element => {
   const { error } = useLoaderData();
-  console.log({ error });
   return (
     <div>
       <h1 className='my-4 py-2 bg-clip-text bg-gradient-to-r font-extrabold from-violet-400 to-rose-500 dark:from-pink-200 dark:to-violet-500 h1 leading-tighter md:text-6xl text-5xl text-center text-transparent tracking-tighter'>
@@ -76,7 +76,8 @@ const Home: FunctionComponent<IHomeProps> = (): JSX.Element => {
         </div>
 
         <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
-          <div className='bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10'>
+          <div className='bg-white text-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10'>
+            {error && <SimpleAlert type='error'>{error}</SimpleAlert>}
             <Form method='post' className='space-y-6'>
               <SigninForm />
             </Form>

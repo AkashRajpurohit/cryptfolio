@@ -14,7 +14,7 @@ interface IDashboardLoaderData {
 export const loader: LoaderFunction = async ({ request }) => {
   const session = await getSession(request.headers.get('Cookie'));
   if (!session.has('userId')) {
-    session.flash('error', 'You must be logged in to view this page.');
+    session.flash('error', 'You must be logged in first.');
     return redirect('/', {
       headers: {
         'Set-Cookie': await commitSession(session),
