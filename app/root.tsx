@@ -9,6 +9,7 @@ import {
   ScrollRestoration,
   useCatch,
 } from 'remix';
+import { ThemeProvider, useTheme } from './components/ThemeProvider';
 import twStyles from './tailwind.css';
 
 export const links: LinksFunction = () => [
@@ -35,9 +36,10 @@ export const meta: MetaFunction = () => {
   return { title: 'Crypto Portfolio' };
 };
 
-export default function App() {
+export function App() {
+  const { theme } = useTheme();
   return (
-    <html lang='en'>
+    <html lang='en' className={theme ? theme : 'dark'}>
       <head>
         <meta charSet='utf-8' />
         <meta name='viewport' content='width=device-width,initial-scale=1' />
@@ -51,6 +53,14 @@ export default function App() {
         {process.env.NODE_ENV === 'development' && <LiveReload />}
       </body>
     </html>
+  );
+}
+
+export default function AppWithProviders() {
+  return (
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
   );
 }
 

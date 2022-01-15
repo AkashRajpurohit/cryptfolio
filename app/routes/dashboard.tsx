@@ -1,8 +1,14 @@
-import { LogoutIcon, RefreshIcon } from '@heroicons/react/solid';
+import {
+  LogoutIcon,
+  MoonIcon,
+  RefreshIcon,
+  SunIcon,
+} from '@heroicons/react/solid';
 import { FunctionComponent, useEffect } from 'react';
 import { json, LoaderFunction, redirect, useFetcher } from 'remix';
 import AssetsTable from '~/components/AssetsTable';
 import DashboardStats from '~/components/DashboardStats';
+import { useTheme } from '~/components/ThemeProvider';
 import useInterval from '~/hooks/useInterval';
 import { getPortfolio } from '~/lib/binance';
 import { IPortfolio } from '~/lib/types';
@@ -38,6 +44,7 @@ const Dashboard: FunctionComponent = (): JSX.Element => {
   const logout = useFetcher();
   const dashboard = useFetcher<IDashboardLoaderData>();
   const data = dashboard.data;
+  const { toggleTheme, theme } = useTheme();
 
   useEffect(() => {
     dashboard.load('/dashboard');
@@ -76,6 +83,16 @@ const Dashboard: FunctionComponent = (): JSX.Element => {
               )}
             />
           </span>
+          <button
+            className='bg-transparent hover:bg-gray-200 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-50 font-semibold hover:text-gray-600 border border-gray-400 hover:border-transparent rounded-full p-2'
+            onClick={toggleTheme}
+          >
+            {theme === 'light' ? (
+              <MoonIcon className='h-5 w-5' />
+            ) : (
+              <SunIcon className='h-5 w-5' />
+            )}
+          </button>
           <logout.Form method='post' action='/logout'>
             <button
               type='submit'

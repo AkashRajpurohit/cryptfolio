@@ -64,7 +64,7 @@ const TransactionFeed: FunctionComponent<ITransactionFeedProps> = ({
                       <span className='font-bold'>${trade.usdtQuantity}</span>
                     </p>
                   </div>
-                  <div className='text-right text-sm whitespace-nowrap text-gray-500 font-semibold'>
+                  <div className='text-right text-sm whitespace-pre-wrap text-gray-500 font-semibold'>
                     <time dateTime={new Date(trade.time).toDateString()}>
                       {formatDate(trade.time)}
                     </time>
@@ -106,7 +106,7 @@ const TransactionFeed: FunctionComponent<ITransactionFeedProps> = ({
                       </span>{' '}
                     </p>
                   </div>
-                  <div className='text-right text-sm whitespace-nowrap text-gray-500 font-semibold'>
+                  <div className='text-right text-sm whitespace-pre-wrap text-gray-500 font-semibold'>
                     <time dateTime={new Date(deposit.time).toDateString()}>
                       {formatDate(deposit.time)}
                     </time>

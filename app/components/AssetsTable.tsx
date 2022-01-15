@@ -70,8 +70,8 @@ const AssetsTable: FunctionComponent<IAssetsTableProps> = ({
                     key={symbol}
                     className={
                       coin.zone === 'PROFIT'
-                        ? 'bg-profit-50 dark:bg-profit-100'
-                        : 'bg-loss-50 dark:bg-loss-100'
+                        ? 'bg-profit-100 dark:bg-profit-200'
+                        : 'bg-loss-100 dark:bg-loss-200'
                     }
                     onClick={(): void => handleOnRowClick(coin)}
                   >

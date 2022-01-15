@@ -65,7 +65,7 @@ const Home: FunctionComponent<IHomeProps> = (): JSX.Element => {
   return (
     <div>
       <h1 className='my-4 py-2 bg-clip-text bg-gradient-to-r font-extrabold from-violet-400 to-rose-500 dark:from-pink-200 dark:to-violet-500 h1 leading-tighter md:text-6xl text-5xl text-center text-transparent tracking-tighter'>
-        Welcome to Crypto Portfolio
+        Welcome to Cryptfolio
       </h1>
 
       <div className='flex flex-col justify-center py-20 sm:px-6 lg:px-8'>
