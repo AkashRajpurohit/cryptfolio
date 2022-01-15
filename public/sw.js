@@ -14,7 +14,7 @@ self.addEventListener('fetch', (event) => {
 
   // If the request is for the favicons, fonts, or the build files (which are hashed in the name)
   // then return the cached version
-  if (url.pathname.match(/\/(favicon\/.*.*|fonts|build\/.*\.js)/)) {
+  if (url.pathname.match(/\/(favicons\/.*\.*|fonts|build\/.*\.js)/)) {
     event.respondWith(
       // We will open the assets cache
       caches.open('assets').then(async (cache) => {
