@@ -15,7 +15,6 @@ const TransactionModal: FunctionComponent<ITransactionModalProps> = ({
   open,
   onModalClose,
 }): JSX.Element => {
-  console.log({ coin });
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog

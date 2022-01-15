@@ -1,5 +1,5 @@
 import Binance from 'node-binance-api';
-import { IBalance, ICoin, IDeposit, IPortfolio } from './types';
+import { IBalance, ICoin, IDeposit, IPortfolio, ITrade } from './types';
 import { transformDeposit, transformTrade } from './utils';
 
 export const getBinanceClient = (userId: string) => {
@@ -35,7 +35,9 @@ export const getTradeForPair = async ({
   pair: string;
 }) => {
   const trade = await client.trades(pair);
-  return trade.map(transformTrade);
+  return trade
+    .map(transformTrade)
+    .sort((a: ITrade, b: ITrade) => b.time - a.time);
 };
 
 export const getAllTrades = async ({ client }: { client: Binance }) => {
@@ -75,7 +77,8 @@ const getUserDeposits = async ({
   return deposits
     .filter((deposit: any) => deposit.status === 1)
     .map(transformDeposit)
-    .reduce((acc: Record<string, IDeposit[]>, deposit: any) => {
+    .sort((a: IDeposit, b: IDeposit) => b.time - a.time)
+    .reduce((acc: Record<string, IDeposit[]>, deposit: IDeposit) => {
       if (acc[deposit.symbol]) {
         acc[deposit.symbol].push(deposit);
       } else {
