@@ -28,6 +28,7 @@ export const links: LinksFunction = () => [
     sizes: '16x16',
     href: '/favicons/favicon-16x16.png',
   },
+  { rel: 'theme-color', href: '#0F172A' },
 ];
 
 export const meta: MetaFunction = () => {
