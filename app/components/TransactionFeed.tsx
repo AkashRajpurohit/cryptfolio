@@ -57,14 +57,16 @@ const TransactionFeed: FunctionComponent<ITransactionFeedProps> = ({
                       <span className='font-semibold'>
                         {trade.type === 'BUY' ? 'Brought' : 'Sold'}
                       </span>{' '}
-                      <span className='font-bold'>
+                      <span className='font-bold underline decoration-dashed'>
                         {trade.quantity} {formatSymbolName(trade.symbol)}
                       </span>{' '}
                       at <span className='font-bold'>${trade.price}</span>
                     </p>
                     <p className='text-sm text-gray-700 dark:text-gray-200 font-semibold'>
                       Total:{' '}
-                      <span className='font-bold'>${trade.usdtQuantity}</span>
+                      <span className='font-bold underline decoration-wavy'>
+                        ${trade.usdtQuantity}
+                      </span>
                     </p>
                   </div>
                   <div className='text-right text-sm whitespace-pre-wrap text-gray-500 dark:text-gray-300 font-semibold'>
