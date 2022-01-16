@@ -33,11 +33,33 @@ export const links: LinksFunction = () => [
     sizes: '16x16',
     href: '/favicons/favicon-16x16.png',
   },
-  { rel: 'theme-color', href: '#0F172A' },
 ];
 
 export const meta: MetaFunction = () => {
-  return { title: 'Crypto Portfolio' };
+  return {
+    title: 'Crypfolio',
+    description: 'My Crypto Portfolio synched with Binance',
+    'theme-color': '#0F172A',
+    'og:title': 'Crypfolio',
+    'og:description': 'My Crypto Portfolio synched with Binance',
+    'og:image': 'https://crypfolio.com/favicons/apple-touch-icon.png',
+    'og:image:width': '512',
+    'og:image:height': '512',
+    'og:image:type': 'image/png',
+    'og:url': 'https://crypfolio.akashrajpurohit.com',
+    'og:site_name': 'Crypfolio',
+    'og:locale': 'en_US',
+    'og:type': 'website',
+    'twitter:card': 'summary_large_image',
+    'twitter:title': 'Crypfolio',
+    'twitter:description': 'My Crypto Portfolio synched with Binance',
+    'twitter:image': 'https://crypfolio.com/favicons/apple-touch-icon.png',
+    'twitter:image:width': '512',
+    'twitter:image:height': '512',
+    'twitter:image:type': 'image/png',
+    'twitter:url': 'https://crypfolio.akashrajpurohit.com',
+    'twitter:site': '@akashrajpurohit',
+  };
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
