@@ -56,7 +56,7 @@ export const formatSymbolName = (symbol: string) => {
 };
 
 export const formatDate = (date: number) => {
-  return dayjs(date).format('MMM DD, YYYY, hh:mm:ss A');
+  return dayjs(date).format('MMM DD, YYYY, hh:mm A');
 };
 
 export const AUTH_COOKIE_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 30; // 30 days

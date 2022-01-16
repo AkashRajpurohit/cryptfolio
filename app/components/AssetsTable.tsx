@@ -42,17 +42,17 @@ const AssetsTable: FunctionComponent<IAssetsTableProps> = ({
                     scope='col'
                     className='px-6 py-3 text-left text-xs font-bold text-primary-50 uppercase tracking-wider'
                   >
-                    Current Price
+                    Holdings
                   </th>
                   <th
                     scope='col'
                     className='px-6 py-3 text-left text-xs font-bold text-primary-50 uppercase tracking-wider'
                   >
-                    Holdings
+                    Current Price
                   </th>
                   <th
                     scope='col'
-                    className='px-6 py-3 text-left text-xs font-bold text-primary-50 uppercase tracking-wider hidden md:block'
+                    className='px-6 py-3 text-left text-xs font-bold text-primary-50 uppercase tracking-wider'
                   >
                     Avg. Buy Price
                   </th>
@@ -77,7 +77,7 @@ const AssetsTable: FunctionComponent<IAssetsTableProps> = ({
                   >
                     <td className='px-6 py-4 whitespace-nowrap'>
                       <div className='flex items-center'>
-                        <div className='flex-shrink-0 h-10 w-10 hidden md:block'>
+                        <div className='flex-shrink-0 h-10 w-10'>
                           <img
                             className='h-10 w-10 rounded-full'
                             src={`https://cryptoicon-api.vercel.app/api/icon/${formatSymbolName(
@@ -94,20 +94,20 @@ const AssetsTable: FunctionComponent<IAssetsTableProps> = ({
                       </div>
                     </td>
                     <td className='px-6 py-4 whitespace-nowrap'>
+                      <div className='text-sm text-gray-900 font-semibold'>
+                        {formatToNumber(coin.totalQuantity, 4)}{' '}
+                        {formatSymbolName(coin.symbol)}
+                      </div>
+                      <div className='text-sm text-gray-600 font-medium'>
+                        ${formatToNumber(coin.totalUsdtQuantity, 2)}
+                      </div>
+                    </td>
+                    <td className='px-6 py-4 whitespace-nowrap'>
                       <span className='px-2 inline-flex text-sm leading-5 font-semibold text-slate-800 '>
                         ${formatToNumber(coin.currentPrice, 4)}
                       </span>
                     </td>
                     <td className='px-6 py-4 whitespace-nowrap'>
-                      <div className='text-sm text-gray-900 font-semibold'>
-                        ${formatToNumber(coin.totalUsdtQuantity, 2)}
-                      </div>
-                      <div className='text-sm text-gray-500 font-medium'>
-                        {formatToNumber(coin.totalQuantity, 4)}{' '}
-                        {formatSymbolName(coin.symbol)}
-                      </div>
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap hidden md:block'>
                       <span className='px-2 inline-flex text-sm leading-5 font-semibold text-slate-800'>
                         ${formatToNumber(coin.averageBuyPrice || 0, 4)}
                       </span>

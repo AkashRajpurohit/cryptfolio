@@ -30,7 +30,7 @@ const TransactionFeed: FunctionComponent<ITransactionFeedProps> = ({
                   aria-hidden='true'
                 />
               ) : null}
-              <div className='relative flex space-x-3'>
+              <div className='relative flex space-x-6 items-center'>
                 <div>
                   <span
                     className={classNames(
@@ -51,20 +51,23 @@ const TransactionFeed: FunctionComponent<ITransactionFeedProps> = ({
                     )}
                   </span>
                 </div>
-                <div className='min-w-0 flex-1 pt-1.5 flex justify-between space-x-4'>
+                <div className='min-w-0 flex-1 pt-1.5 flex justify-between items-center space-x-6'>
                   <div>
-                    <p className='text-sm text-gray-600'>
+                    <p className='text-sm text-gray-700 dark:text-gray-200'>
                       <span className='font-semibold'>
                         {trade.type === 'BUY' ? 'Brought' : 'Sold'}
                       </span>{' '}
                       <span className='font-bold'>
                         {trade.quantity} {formatSymbolName(trade.symbol)}
                       </span>{' '}
-                      for <span className='font-bold'>{trade.price}</span> i.e{' '}
+                      at <span className='font-bold'>${trade.price}</span>
+                    </p>
+                    <p className='text-sm text-gray-700 dark:text-gray-200 font-semibold'>
+                      Total:{' '}
                       <span className='font-bold'>${trade.usdtQuantity}</span>
                     </p>
                   </div>
-                  <div className='text-right text-sm whitespace-pre-wrap text-gray-500 font-semibold'>
+                  <div className='text-right text-sm whitespace-pre-wrap text-gray-500 dark:text-gray-300 font-semibold'>
                     <time dateTime={new Date(trade.time).toDateString()}>
                       {formatDate(trade.time)}
                     </time>
