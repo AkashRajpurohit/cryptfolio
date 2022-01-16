@@ -30,7 +30,7 @@ const TransactionFeed: FunctionComponent<ITransactionFeedProps> = ({
                   aria-hidden='true'
                 />
               ) : null}
-              <div className='relative flex space-x-6 items-center'>
+              <div className='relative flex space-x-3 md:space-x-6 items-center'>
                 <div>
                   <span
                     className={classNames(
@@ -51,7 +51,7 @@ const TransactionFeed: FunctionComponent<ITransactionFeedProps> = ({
                     )}
                   </span>
                 </div>
-                <div className='min-w-0 flex-1 pt-1.5 flex justify-between items-center space-x-6'>
+                <div className='min-w-0 flex-1 pt-1.5 flex justify-between items-center space-x-3 md:space-x-6'>
                   <div>
                     <p className='text-sm text-gray-700 dark:text-gray-200'>
                       <span className='font-semibold'>
@@ -87,7 +87,7 @@ const TransactionFeed: FunctionComponent<ITransactionFeedProps> = ({
                   aria-hidden='true'
                 />
               ) : null}
-              <div className='relative flex space-x-3'>
+              <div className='relative flex space-x-3 md:space-x-6 items-center'>
                 <div>
                   <span
                     className={
@@ -100,16 +100,16 @@ const TransactionFeed: FunctionComponent<ITransactionFeedProps> = ({
                     />
                   </span>
                 </div>
-                <div className='min-w-0 flex-1 pt-1.5 flex justify-between space-x-4'>
+                <div className='min-w-0 flex-1 pt-1.5 flex justify-between items-center space-x-3 md:space-x-6'>
                   <div>
-                    <p className='text-sm text-gray-600'>
+                    <p className='text-sm text-gray-600 dark:text-gray-200'>
                       <span className='font-semibold'>Deposited</span>{' '}
                       <span className='font-bold'>
                         {deposit.quantity} {formatSymbolName(deposit.symbol)}
                       </span>{' '}
                     </p>
                   </div>
-                  <div className='text-right text-sm whitespace-pre-wrap text-gray-500 font-semibold'>
+                  <div className='text-right text-sm whitespace-pre-wrap text-gray-500 dark:text-gray-300 font-semibold'>
                     <time dateTime={new Date(deposit.time).toDateString()}>
                       {formatDate(deposit.time)}
                     </time>

@@ -202,6 +202,6 @@ export const getPortfolio = async ({ userId }: { userId: string }) => {
     return { portfolio, usdtBalance };
   } catch (err) {
     console.error(err);
-    throw new Error('Error getting portfolio');
+    throw new Error('Error getting portfolio information');
   }
 };

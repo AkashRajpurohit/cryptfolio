@@ -27,9 +27,9 @@ const AssetsTable: FunctionComponent<IAssetsTableProps> = ({
   return (
     <div className='flex flex-col mt-4'>
       <div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
-        <div className='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
+        <div className='py-2 align-middle inline-block sm:px-6 lg:px-8'>
           <div className='shadow overflow-hidden border-b border-gray-200 sm:rounded-lg'>
-            <table className='min-w-full divide-y divide-gray-200'>
+            <table className='divide-y divide-gray-200 w-full'>
               <thead className='bg-primary-700'>
                 <tr>
                   <th
@@ -77,7 +77,7 @@ const AssetsTable: FunctionComponent<IAssetsTableProps> = ({
                   >
                     <td className='px-6 py-4 whitespace-nowrap'>
                       <div className='flex items-center'>
-                        <div className='flex-shrink-0 h-10 w-10'>
+                        <div className='flex-shrink-0 h-10 w-10 hidden md:block'>
                           <img
                             className='h-10 w-10 rounded-full'
                             src={`https://cryptoicon-api.vercel.app/api/icon/${formatSymbolName(
