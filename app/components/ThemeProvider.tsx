@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useFetcher } from 'remix';
+import useUpdateEffect from '~/hooks/useUpdateEffect';
 
 export type Theme = 'light' | 'dark';
 const themes: Array<Theme> = ['light', 'dark'];
@@ -49,14 +50,7 @@ const ThemeProvider: React.FunctionComponent<{
     persistThemeRef.current = persistTheme;
   }, [persistTheme]);
 
-  const mountRun = useRef(false);
-
-  useEffect(() => {
-    if (!mountRun.current) {
-      mountRun.current = true;
-      return;
-    }
-
+  useUpdateEffect(() => {
     if (!theme) return;
 
     persistThemeRef.current.submit(
