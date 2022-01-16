@@ -34,7 +34,7 @@ const AssetsTable: FunctionComponent<IAssetsTableProps> = ({
                 <tr>
                   <th
                     scope='col'
-                    className='px-6 py-3 text-left text-xs font-bold text-primary-50 uppercase tracking-wider'
+                    className='px-6 py-3 text-left text-xs font-bold text-primary-50 uppercase tracking-wider hidden md:block'
                   >
                     Name
                   </th>
@@ -75,7 +75,7 @@ const AssetsTable: FunctionComponent<IAssetsTableProps> = ({
                     }
                     onClick={(): void => handleOnRowClick(coin)}
                   >
-                    <td className='px-6 py-4 whitespace-nowrap'>
+                    <td className='px-6 py-4 whitespace-nowrap hidden md:block'>
                       <div className='flex items-center'>
                         <div className='flex-shrink-0 h-10 w-10 hidden md:block'>
                           <img
