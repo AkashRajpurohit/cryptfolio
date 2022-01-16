@@ -106,8 +106,8 @@ const Dashboard: FunctionComponent = (): JSX.Element => {
         </div>
       </div>
       <DashboardStats portfolio={portfolio} usdtBalance={usdtBalance} />
-      <div className='mt-4 text-2xl'>
-        <h2 className='capitalize'>Your assets</h2>
+      <div className='mt-4'>
+        <h2 className='capitalize my-6 text-3xl font-bold'>Your assets</h2>
         <AssetsTable portfolio={portfolio} />
       </div>
     </div>

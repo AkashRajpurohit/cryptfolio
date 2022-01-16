@@ -1,4 +1,3 @@
-import { ArrowSmDownIcon, ArrowSmUpIcon } from '@heroicons/react/solid';
 import { Fragment, FunctionComponent, useState } from 'react';
 import { ICoin, IPortfolio } from '~/lib/types';
 import { classNames, formatSymbolName, formatToNumber } from '~/lib/utils';
@@ -26,7 +25,7 @@ const AssetsTable: FunctionComponent<IAssetsTableProps> = ({
 
   return (
     <Fragment>
-      <div className='flex flex-col mt-4'>
+      <div className='flex flex-col'>
         <div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
           <div className='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
             <div className='shadow overflow-hidden border-b border-gray-200 sm:rounded-lg'>
@@ -35,31 +34,31 @@ const AssetsTable: FunctionComponent<IAssetsTableProps> = ({
                   <tr>
                     <th
                       scope='col'
-                      className='px-6 py-3 text-left text-xs font-bold text-primary-50 uppercase tracking-wider'
+                      className='px-6 py-3 text-left text-xs font-medium text-primary-50 uppercase tracking-wider'
                     >
                       Name
                     </th>
                     <th
                       scope='col'
-                      className='px-6 py-3 text-left text-xs font-bold text-primary-50 uppercase tracking-wider'
+                      className='px-6 py-3 text-left text-xs font-medium text-primary-50 uppercase tracking-wider'
                     >
                       Holdings
                     </th>
                     <th
                       scope='col'
-                      className='px-6 py-3 text-left text-xs font-bold text-primary-50 uppercase tracking-wider'
+                      className='px-6 py-3 text-left text-xs font-medium text-primary-50 uppercase tracking-wider'
                     >
                       Current Price
                     </th>
                     <th
                       scope='col'
-                      className='px-6 py-3 text-left text-xs font-bold text-primary-50 uppercase tracking-wider'
+                      className='px-6 py-3 text-left text-xs font-medium text-primary-50 uppercase tracking-wider'
                     >
-                      Avg. Buy Price
+                      Avg Buy Price
                     </th>
                     <th
                       scope='col'
-                      className='px-6 py-3 text-left text-xs font-bold text-primary-50 uppercase tracking-wider'
+                      className='px-6 py-3 text-left text-xs font-medium text-primary-50 uppercase tracking-wider'
                     >
                       Profit/Loss
                     </th>
@@ -84,11 +83,11 @@ const AssetsTable: FunctionComponent<IAssetsTableProps> = ({
                               src={`https://cryptoicon-api.vercel.app/api/icon/${formatSymbolName(
                                 symbol
                               ).toLowerCase()}`}
-                              alt=''
+                              alt={`${symbol} icon`}
                             />
                           </div>
                           <div className='ml-4'>
-                            <div className='text-sm font-bold text-gray-900'>
+                            <div className='text-sm font-medium text-gray-900'>
                               {formatSymbolName(symbol)}
                             </div>
                           </div>
@@ -104,46 +103,35 @@ const AssetsTable: FunctionComponent<IAssetsTableProps> = ({
                         </div>
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap'>
-                        <span className='px-2 inline-flex text-sm leading-5 font-semibold text-slate-800 '>
+                        <span className='px-2 inline-flex text-sm leading-5 font-semibold text-gray-800'>
                           ${formatToNumber(coin.currentPrice, 4)}
                         </span>
                       </td>
-                      <td className='px-6 py-4 whitespace-nowrap'>
-                        <span className='px-2 inline-flex text-sm leading-5 font-semibold text-slate-800'>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                        <span className='px-2 inline-flex text-sm leading-5 font-semibold text-gray-800'>
                           ${formatToNumber(coin.averageBuyPrice || 0, 4)}
                         </span>
                       </td>
-                      <td className='px-6 py-4 whitespace-nowrap'>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm font-medium flex flex-col gap-2 items-center'>
                         <div className='text-sm text-gray-900 font-semibold'>
                           {coin.zone === 'LOSS' && '-'}$
                           {formatToNumber(coin.profitAndLoss || 0, 2)}
                         </div>
-
-                        <div
-                          className={classNames(
-                            coin.zone === 'PROFIT'
-                              ? ' text-green-800'
-                              : ' text-red-800',
-                            'inline-flex text-sm font-semibold md:mt-2 lg:mt-0'
-                          )}
-                        >
-                          {coin.zone === 'PROFIT' ? (
-                            <ArrowSmUpIcon
-                              className='-ml-1 mr-0.5 flex-shrink-0 self-center h-5 w-5 text-green-500'
-                              aria-hidden='true'
-                            />
-                          ) : (
-                            <ArrowSmDownIcon
-                              className='-ml-1 mr-0.5 flex-shrink-0 self-center h-5 w-5 text-red-500'
-                              aria-hidden='true'
-                            />
-                          )}
-                          <span className='sr-only'>
-                            {coin.zone === 'PROFIT' ? 'Increased' : 'Decreased'}{' '}
-                            by
+                        <div className='text-sm text-gray-600 font-medium'>
+                          <span
+                            className={classNames(
+                              'rounded-full py-1 px-4',
+                              coin.zone === 'PROFIT'
+                                ? 'bg-green-100 text-green-800'
+                                : 'bg-red-100 text-red-800'
+                            )}
+                          >
+                            {formatToNumber(
+                              coin.profitAndLossPercentage || 0,
+                              2
+                            )}
+                            %
                           </span>
-                          {formatToNumber(coin.profitAndLossPercentage || 0, 2)}
-                          %
                         </div>
                       </td>
                     </tr>
