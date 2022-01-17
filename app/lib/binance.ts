@@ -1,6 +1,6 @@
 import Binance from 'node-binance-api';
 import { IBalance, ICoin, IDeposit, IPortfolio, ITrade } from './types';
-import { transformDeposit, transformTrade } from './utils';
+import { getAverage, transformDeposit, transformTrade } from './utils';
 
 export const getBinanceClient = (userId: string) => {
   let API_KEY: string;
@@ -179,8 +179,7 @@ export const getPortfolio = async ({ userId }: { userId: string }) => {
       }
 
       if (portfolio[coin].totalQuantity > 0) {
-        portfolio[coin].averageBuyPrice =
-          portfolio[coin].totalUsdtQuantity / portfolio[coin].totalQuantity;
+        portfolio[coin].averageBuyPrice = getAverage(portfolio[coin]);
 
         portfolio[coin].currentValue =
           portfolio[coin].currentPrice * portfolio[coin].totalQuantity;
