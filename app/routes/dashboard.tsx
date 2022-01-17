@@ -52,7 +52,10 @@ const Dashboard: FunctionComponent = (): JSX.Element => {
 
   // Periodically refresh the dashboard data.
   useInterval(() => {
-    dashboard.load('/dashboard');
+    // If the user is not currently on this tab, don't keep refreshing the data and avoid abusing the API.
+    if (document && !document.hidden) {
+      dashboard.load('/dashboard');
+    }
   }, REFRESH_INTERVAL);
 
   if (!data && dashboard.state === 'loading') {
