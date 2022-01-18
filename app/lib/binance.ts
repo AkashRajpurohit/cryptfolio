@@ -55,7 +55,9 @@ export const getAllTrades = async ({ client }: { client: Binance }) => {
     .map((trade) => (trade.status === 'fulfilled' ? trade.value : []));
 
   const trades = allValidTrades.flat();
-  const usdtBalance = Number(userPortfolio['USDT']);
+  const usdtBalance =
+    Number(userPortfolio['USDT'].available) +
+    Number(userPortfolio['USDT'].onOrder);
 
   return { trades, usdtBalance };
 };
@@ -88,18 +90,22 @@ const getUserDeposits = async ({
     }, {});
 };
 
-const getUserBalance = async ({ client }: { client: Binance }) => {
+const getUserBalance = async ({
+  client,
+}: {
+  client: Binance;
+}): Promise<Record<string, IBalance>> => {
   const balances = await getBalances({ client });
 
   const balancePortfolio = Object.entries(balances).reduce(
     (acc, [key, value]) => {
       const availableNum = Number(value.available);
       if (availableNum > 0) {
-        acc[key] = availableNum;
+        acc[key] = { available: availableNum, onOrder: Number(value.onOrder) };
       }
       return acc;
     },
-    {} as Record<string, number>
+    {} as Record<string, IBalance>
   );
 
   return balancePortfolio;

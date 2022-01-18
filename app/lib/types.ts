@@ -1,6 +1,6 @@
 export interface IBalance {
-  available: string;
-  onOrder: string;
+  available: string | number;
+  onOrder: string | number;
 }
 
 export interface ITrade {
