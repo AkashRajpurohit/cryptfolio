@@ -10,7 +10,7 @@ import {
   Scripts,
   ScrollRestoration,
   useCatch,
-  useLoaderData,
+  useLoaderData
 } from 'remix';
 import { Theme, ThemeProvider, useTheme } from '~/components/ThemeProvider';
 import { getThemeSession } from '~/sessions';
@@ -77,6 +77,14 @@ export function App() {
         <meta name='viewport' content='width=device-width,initial-scale=1' />
         <Meta />
         <Links />
+        {process.env.NODE_ENV === 'production' && (
+          <script
+            async
+            defer
+            data-website-id='3a193c62-52cb-4964-8dcf-caa1c5cb1c7f'
+            src='https://umami-akash.vercel.app/umami.js'
+          ></script>
+        )}
       </head>
       <body className='bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-50 max-w-5xl mx-auto px-4 py-6 md:px-8 md:py-10 selection:bg-primary-300 selection:text-primary-900'>
         <Outlet />
