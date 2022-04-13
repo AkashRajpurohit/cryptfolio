@@ -12,7 +12,7 @@ self.addEventListener('fetch', (event) => {
   // Additionally cache the cryptoicon-api requests which we use for the icons, so that we can burden less on the 3rd party service
   if (
     url.pathname.match(/\/(favicons\/.*\.*|fonts|build\/.*\.js)/) ||
-    url.hostname === 'cryptoicon-api.vercel.app'
+    url.hostname === 'cryptoicon-api-ten.vercel.app'
   ) {
     event.respondWith(
       // We will open the assets cache
