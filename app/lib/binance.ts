@@ -63,11 +63,10 @@ export const getAllTrades = async ({ client }: { client: Binance }) => {
 
   const trades = allValidTrades.flat();
 
-  const usdtBalance =
-    Number(userPortfolio['USDT'].available) +
-    Number(userPortfolio['USDT'].onOrder);
+  const usdtBalanceAvailable = Number(userPortfolio['USDT'].available)
+  const usdtBalanceOnOrder = Number(userPortfolio['USDT'].onOrder)
 
-  return { trades, usdtBalance };
+  return { trades, usdtBalanceAvailable, usdtBalanceOnOrder };
 };
 
 const getBalances = async ({
@@ -127,7 +126,7 @@ export const getPortfolio = async ({ userId }: { userId: string }) => {
   try {
     const client = getBinanceClient(userId);
 
-    const { trades, usdtBalance } = await getAllTrades({ client });
+    const { trades, usdtBalanceAvailable, usdtBalanceOnOrder } = await getAllTrades({ client });
     const deposits = await getUserDeposits({ client });
 
     const currentPrices = await getCurrentPrices({ client });
@@ -214,7 +213,7 @@ export const getPortfolio = async ({ userId }: { userId: string }) => {
       }
     }
 
-    return { portfolio, usdtBalance };
+    return { portfolio, usdtBalanceAvailable, usdtBalanceOnOrder };
   } catch (err) {
     console.error(err);
     throw new Error('Error getting portfolio information');

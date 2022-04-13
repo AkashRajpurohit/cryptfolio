@@ -5,17 +5,19 @@ import {
   classNames,
   formatToNumber,
   getCurrentUSDTValueOfPortfolio,
-  getTotalInvestedUSDTValueOfPortfolio,
+  getTotalInvestedUSDTValueOfPortfolio
 } from '~/lib/utils';
 
 interface IDashboardStats {
   portfolio: IPortfolio;
-  usdtBalance: number | string;
+  usdtBalanceAvailable: number;
+  usdtBalanceOnOrder: number;
 }
 
 const DashboardStats: FunctionComponent<IDashboardStats> = ({
   portfolio,
-  usdtBalance,
+  usdtBalanceAvailable,
+  usdtBalanceOnOrder,
 }): JSX.Element => {
   const currentUSDTValue = formatToNumber(
     getCurrentUSDTValueOfPortfolio(portfolio),
@@ -36,7 +38,7 @@ const DashboardStats: FunctionComponent<IDashboardStats> = ({
     <div className='mt-4'>
       <dl
         className={classNames(
-          'mt-5 grid grid-cols-1 rounded-lg bg-primary-50 dark:bg-primary-800 overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-2 md:divide-y-0 md:divide-x',
+          'mt-5 grid grid-cols-1 rounded-lg bg-primary-50 dark:bg-primary-800 overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-3 md:divide-y-0 md:divide-x',
           changeType === 'increase'
             ? 'bg-profit-200 dark:bg-profit-800'
             : 'bg-loss-200 dark:bg-loss-800'
@@ -47,9 +49,9 @@ const DashboardStats: FunctionComponent<IDashboardStats> = ({
             Current Balance
           </dt>
           <dd className='mt-1 flex justify-between items-baseline md:block lg:flex'>
-            <div className='flex items-baseline text-3xl font-bold text-primary-600 dark:text-primary-50'>
+            <div className='flex flex-col gap-1 items-baseline text-3xl font-bold text-primary-600 dark:text-primary-50'>
               ${currentUSDTValue}
-              <span className='ml-2 text-sm font-semibold text-slate-500 dark:text-primary-200'>
+              <span className='text-sm font-semibold text-slate-500 dark:text-primary-200'>
                 from ${totalUSDTInvested}
               </span>
             </div>
@@ -81,13 +83,24 @@ const DashboardStats: FunctionComponent<IDashboardStats> = ({
           </dd>
         </div>
 
-        <div className='px-4 py-5 sm:p-6 bg-primary-50 dark:bg-primary-800'>
+        <div className='px-4 py-5 sm:p-6 bg-primary-100 dark:bg-primary-800'>
           <dt className='text-xl font-normal text-gray-900 dark:text-primary-50'>
             USDT Available
           </dt>
           <dd className='mt-1 flex justify-between items-baseline md:block lg:flex'>
             <div className='flex items-baseline text-3xl font-bold text-primary-600 dark:text-primary-50'>
-              ${formatToNumber(usdtBalance, 2)}
+              ${formatToNumber(usdtBalanceAvailable, 2)}
+            </div>
+          </dd>
+        </div>
+
+        <div className='px-4 py-5 sm:p-6 bg-green-200 dark:bg-green-600'>
+          <dt className='text-xl font-normal text-gray-900 dark:text-primary-50'>
+            USDT on Order
+          </dt>
+          <dd className='mt-1 flex justify-between items-baseline md:block lg:flex'>
+            <div className='flex items-baseline text-3xl font-bold text-primary-600 dark:text-primary-50'>
+              ${formatToNumber(usdtBalanceOnOrder, 2)}
             </div>
           </dd>
         </div>

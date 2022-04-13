@@ -17,7 +17,8 @@ import { commitAuthSession, getAuthSession } from '~/sessions';
 
 interface IDashboardLoaderData {
   portfolio: IPortfolio;
-  usdtBalance: number | string;
+  usdtBalanceAvailable: number;
+  usdtBalanceOnOrder: number;
   userId: string;
 }
 
@@ -34,10 +35,10 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   const userId = session.get('userId');
 
-  const { portfolio, usdtBalance } = await getPortfolio({
+  const { portfolio, usdtBalanceAvailable, usdtBalanceOnOrder } = await getPortfolio({
     userId,
   });
-  return json({ portfolio, usdtBalance, userId });
+  return json({ portfolio, usdtBalanceAvailable, usdtBalanceOnOrder, userId });
 };
 
 const Dashboard: FunctionComponent = (): JSX.Element => {
@@ -70,7 +71,7 @@ const Dashboard: FunctionComponent = (): JSX.Element => {
 
   console.log(data)
 
-  const { portfolio, usdtBalance, userId } = data;
+  const { portfolio, userId, usdtBalanceAvailable, usdtBalanceOnOrder } = data;
 
   return (
     <div>
@@ -110,7 +111,7 @@ const Dashboard: FunctionComponent = (): JSX.Element => {
           </logout.Form>
         </div>
       </div>
-      <DashboardStats portfolio={portfolio} usdtBalance={usdtBalance} />
+      <DashboardStats portfolio={portfolio} usdtBalanceAvailable={usdtBalanceAvailable} usdtBalanceOnOrder={usdtBalanceOnOrder} />
       <div className='mt-4'>
         <h2 className='capitalize my-6 text-3xl font-bold'>Your assets</h2>
         <AssetsTable portfolio={portfolio} />
