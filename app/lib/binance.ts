@@ -52,9 +52,17 @@ export const getAllTrades = async ({ client }: { client: Binance }) => {
 
   const allValidTrades = allTrades
     .filter((trade) => trade.status === 'fulfilled')
-    .map((trade) => (trade.status === 'fulfilled' ? trade.value : []));
+    .map((trade) => (trade.status === 'fulfilled' ? trade.value : []))
+    .map(trade => {
+      const firstTrade = trade[trade.length - 1]
+      if (firstTrade.type !== 'BUY') {
+        return trade.slice(0, trade.length - 1);
+      }
+      return trade;
+    })
 
   const trades = allValidTrades.flat();
+
   const usdtBalance =
     Number(userPortfolio['USDT'].available) +
     Number(userPortfolio['USDT'].onOrder);
@@ -191,14 +199,16 @@ export const getPortfolio = async ({ userId }: { userId: string }) => {
           portfolio[coin].currentPrice * portfolio[coin].totalQuantity;
 
         const difference =
-          (portfolio[coin].currentValue || 0) -
-          (portfolio[coin].totalUsdtQuantity || 0);
+          Math.abs(portfolio[coin].currentValue ?? 0) -
+          Math.abs(portfolio[coin].totalUsdtQuantity ?? 0);
 
         portfolio[coin].profitAndLoss = Math.abs(difference);
+        
         portfolio[coin].profitAndLossPercentage =
-          ((portfolio[coin].profitAndLoss || 1) /
-            portfolio[coin].totalUsdtQuantity) *
+          (Math.abs(portfolio[coin].profitAndLoss ?? 1) /
+            Math.abs(portfolio[coin].totalUsdtQuantity)) *
           100;
+
         portfolio[coin].zone =
           difference === 0 ? 'NEUTRAL' : difference > 0 ? 'PROFIT' : 'LOSS';
       }

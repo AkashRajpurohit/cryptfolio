@@ -2,7 +2,7 @@ import {
   LogoutIcon,
   MoonIcon,
   RefreshIcon,
-  SunIcon,
+  SunIcon
 } from '@heroicons/react/solid';
 import { FunctionComponent, useEffect } from 'react';
 import { json, LoaderFunction, redirect, useFetcher } from 'remix';
@@ -67,6 +67,8 @@ const Dashboard: FunctionComponent = (): JSX.Element => {
     );
   }
   if (!data) return <></>;
+
+  console.log(data)
 
   const { portfolio, usdtBalance, userId } = data;
 
