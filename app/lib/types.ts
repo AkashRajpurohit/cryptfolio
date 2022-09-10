@@ -40,3 +40,26 @@ export interface ICoin {
 export interface IPortfolio {
   [key: string]: ICoin;
 }
+
+export interface KuCoin {
+  code: string;
+  data: Data;
+}
+export interface Data {
+  token: string;
+  instanceServers: (InstanceServersEntity)[];
+}
+export interface InstanceServersEntity {
+  endpoint: string;
+  encrypt: boolean;
+  protocol: string;
+  pingInterval: number;
+  pingTimeout: number;
+}
+
+export interface CoinTracker {
+  [key: string]: {
+    price: number;
+    direction: 'UP' | 'DOWN';
+  }
+}
