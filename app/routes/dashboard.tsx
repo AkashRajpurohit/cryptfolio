@@ -195,6 +195,7 @@ const Dashboard: FunctionComponent = (): JSX.Element => {
         portfolio={portfolio}
         usdtBalanceAvailable={usdtBalanceAvailable}
         usdtBalanceOnOrder={usdtBalanceOnOrder}
+        coinTracker={coinTracker}
       />
       <div className='mt-4'>
         <h2 className='capitalize my-6 text-3xl font-bold'>Your assets</h2>

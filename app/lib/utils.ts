@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { twMerge } from 'tailwind-merge';
-import { ICoin, IDeposit, IPortfolio, ITrade } from './types';
+import { CoinTracker, ICoin, IDeposit, IPortfolio, ITrade } from './types';
 
 export const transformTrade = (trade: any): ITrade => {
   return {
@@ -28,7 +28,7 @@ export const transformDeposit = (deposit: any): IDeposit => {
 
 export const formatToNumber = (
   value: string | number,
-  decimal = 10
+  decimal = 10,
 ): number => {
   return Number(Number(value).toFixed(decimal));
 };
@@ -37,17 +37,21 @@ export const classNames = (...classes: string[]) => {
   return twMerge(classes.filter(Boolean).join(' '));
 };
 
-export const getCurrentUSDTValueOfPortfolio = (portfolio: IPortfolio) => {
+export const getCurrentUSDTValueOfPortfolio = (
+  portfolio: IPortfolio,
+  coinTracker: CoinTracker,
+) => {
   return Object.values(portfolio).reduce(
-    (acc, coin: ICoin) => acc + (coin.currentValue || 0),
-    0
+    (acc, coin: ICoin) =>
+      acc + ((coinTracker[coin.symbol]?.price ?? 0) * coin.totalQuantity ?? 0),
+    0,
   );
 };
 
 export const getTotalInvestedUSDTValueOfPortfolio = (portfolio: IPortfolio) => {
   return Object.values(portfolio).reduce(
     (acc, coin: ICoin) => acc + (coin.totalUsdtQuantity || 0),
-    0
+    0,
   );
 };
 
@@ -64,11 +68,11 @@ export const getAverage = (coin: ICoin) => {
   const buyTrades = trades.filter((trade) => trade.type === 'BUY');
   const buyTradesTotal = buyTrades.reduce(
     (acc, trade) => acc + trade.usdtQuantity,
-    0
+    0,
   );
   const buyTradesQuantity = buyTrades.reduce(
     (acc, trade) => acc + trade.quantity,
-    0
+    0,
   );
 
   return buyTradesTotal / buyTradesQuantity;

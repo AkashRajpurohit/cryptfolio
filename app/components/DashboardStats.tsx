@@ -1,6 +1,6 @@
 import { ArrowSmDownIcon, ArrowSmUpIcon } from '@heroicons/react/solid';
 import { FunctionComponent } from 'react';
-import { IPortfolio } from '~/lib/types';
+import { CoinTracker, IPortfolio } from '~/lib/types';
 import {
   classNames,
   formatToNumber,
@@ -12,15 +12,17 @@ interface IDashboardStats {
   portfolio: IPortfolio;
   usdtBalanceAvailable: number;
   usdtBalanceOnOrder: number;
+  coinTracker: CoinTracker;
 }
 
 const DashboardStats: FunctionComponent<IDashboardStats> = ({
   portfolio,
   usdtBalanceAvailable,
   usdtBalanceOnOrder,
+  coinTracker
 }): JSX.Element => {
   const currentUSDTValue = formatToNumber(
-    getCurrentUSDTValueOfPortfolio(portfolio),
+    getCurrentUSDTValueOfPortfolio(portfolio, coinTracker),
     2
   );
   const totalUSDTInvested = formatToNumber(
