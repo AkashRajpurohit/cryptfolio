@@ -74,6 +74,8 @@ export const getAverage = (coin: ICoin) => {
   return buyTradesTotal / buyTradesQuantity;
 };
 
+export const blockedPairs = ['LUNAUSDT', 'LUNCUSDT'];
+
 export const AUTH_COOKIE_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 30; // 30 days
 export const THEME_COOKIE_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 365; // 1 year
 export const REFRESH_INTERVAL = 1000 * 30; // 30 seconds

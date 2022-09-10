@@ -1,6 +1,6 @@
 import Binance from 'node-binance-api';
 import { IBalance, ICoin, IDeposit, IPortfolio, ITrade } from './types';
-import { getAverage, transformDeposit, transformTrade } from './utils';
+import { blockedPairs, getAverage, transformDeposit, transformTrade } from './utils';
 
 export const getBinanceClient = (userId: string) => {
   let API_KEY: string;
@@ -34,7 +34,12 @@ export const getTradeForPair = async ({
   client: Binance;
   pair: string;
 }) => {
+  if (blockedPairs.includes(pair)) {
+    return [];
+  }
+
   const trade = await client.trades(pair);
+
   return trade
     .map(transformTrade)
     .sort((a: ITrade, b: ITrade) => b.time - a.time);
