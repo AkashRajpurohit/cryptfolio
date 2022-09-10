@@ -55,7 +55,7 @@ export const getAllTrades = async ({ client }: { client: Binance }) => {
     .map((trade) => (trade.status === 'fulfilled' ? trade.value : []))
     .map(trade => {
       const firstTrade = trade[trade.length - 1]
-      if (firstTrade.type !== 'BUY') {
+      if (firstTrade && firstTrade.type !== 'BUY') {
         return trade.slice(0, trade.length - 1);
       }
       return trade;
