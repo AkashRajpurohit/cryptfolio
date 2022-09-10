@@ -69,8 +69,6 @@ const Dashboard: FunctionComponent = (): JSX.Element => {
   }
   if (!data) return <></>;
 
-  console.log(data)
-
   const { portfolio, userId, usdtBalanceAvailable, usdtBalanceOnOrder } = data;
 
   return (
