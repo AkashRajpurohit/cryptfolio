@@ -43,7 +43,7 @@ export const getCurrentUSDTValueOfPortfolio = (
 ) => {
   return Object.values(portfolio).reduce(
     (acc, coin: ICoin) =>
-      acc + ((coinTracker[coin.symbol]?.price ?? 0) * coin.totalQuantity ?? 0),
+      acc + ((coinTracker[coin.symbol]?.price ?? coin.currentPrice) * coin.totalQuantity ?? 0),
     0,
   );
 };

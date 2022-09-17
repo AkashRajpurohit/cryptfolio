@@ -1,8 +1,4 @@
-import {
-  Fragment,
-  FunctionComponent,
-  useState,
-} from 'react';
+import { Fragment, FunctionComponent, useState } from 'react';
 import { CoinTracker, ICoin, IPortfolio } from '~/lib/types';
 import { classNames, formatSymbolName, formatToNumber } from '~/lib/utils';
 import ArrowDown from './ArrowDown';
@@ -15,8 +11,12 @@ interface IAssetsTableProps {
 }
 
 const getProfitOrLossData = (coin: ICoin, currentMarketPrice: number) => {
-  if (!coin || !currentMarketPrice)
-    return { profitAndLoss: 0, profitAndLossPercentage: 0, zone: 'NEUTRAL' };
+  if (!currentMarketPrice)
+    return {
+      profitAndLoss: coin.profitAndLoss as number,
+      profitAndLossPercentage: coin.profitAndLossPercentage as number,
+      zone: coin.zone as 'PROFIT' | 'LOSS' | 'NEUTRAL',
+    };
 
   const currentValue = currentMarketPrice * coin.totalQuantity;
   const difference =
@@ -142,7 +142,7 @@ const AssetsTable: FunctionComponent<IAssetsTableProps> = ({
                           <span className='px-2 inline-flex text-sm leading-5 font-semibold text-gray-800'>
                             $
                             {formatToNumber(
-                              coinTracker[coin.symbol]?.price ?? 0,
+                              coinTracker[coin.symbol]?.price ?? coin.currentPrice,
                               4,
                             )}
                             {coinTracker[coin.symbol]?.direction === 'UP' && (
