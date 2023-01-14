@@ -10,7 +10,7 @@ import {
   Scripts,
   ScrollRestoration,
   useCatch,
-  useLoaderData
+  useLoaderData,
 } from 'remix';
 import { Theme, ThemeProvider, useTheme } from '~/components/ThemeProvider';
 import { getThemeSession } from '~/sessions';
@@ -38,10 +38,10 @@ export const links: LinksFunction = () => [
 export const meta: MetaFunction = () => {
   return {
     title: 'Crypfolio',
-    description: 'My Crypto Portfolio synched with Binance',
+    description: 'Your Crypto Portfolio synched with Binance',
     'theme-color': '#0F172A',
     'og:title': 'Crypfolio',
-    'og:description': 'My Crypto Portfolio synched with Binance',
+    'og:description': 'Your Crypto Portfolio synched with Binance',
     'og:image': 'https://crypfolio.com/favicons/apple-touch-icon.png',
     'og:image:width': '512',
     'og:image:height': '512',
@@ -52,13 +52,13 @@ export const meta: MetaFunction = () => {
     'og:type': 'website',
     'twitter:card': 'summary_large_image',
     'twitter:title': 'Crypfolio',
-    'twitter:description': 'My Crypto Portfolio synched with Binance',
-    'twitter:image': 'https://crypfolio.com/favicons/apple-touch-icon.png',
-    'twitter:image:width': '512',
-    'twitter:image:height': '512',
+    'twitter:description': 'Your Crypto Portfolio synched with Binance',
+    'twitter:image': 'https://crypfolio.akashrajpurohit.com/twitter-card.png',
+    'twitter:image:width': '1200',
+    'twitter:image:height': '627',
     'twitter:image:type': 'image/png',
     'twitter:url': 'https://crypfolio.akashrajpurohit.com',
-    'twitter:site': '@akashrajpurohit',
+    'twitter:site': '@AkashWhoCodes',
   };
 };
 
@@ -77,14 +77,6 @@ export function App() {
         <meta name='viewport' content='width=device-width,initial-scale=1' />
         <Meta />
         <Links />
-        {process.env.NODE_ENV === 'production' && (
-          <script
-            async
-            defer
-            data-website-id='3a193c62-52cb-4964-8dcf-caa1c5cb1c7f'
-            src='https://umami-akash.vercel.app/umami.js'
-          ></script>
-        )}
       </head>
       <body className='bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-50 max-w-5xl mx-auto px-4 py-6 md:px-8 md:py-10 selection:bg-primary-300 selection:text-primary-900'>
         <Outlet />
