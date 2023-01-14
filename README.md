@@ -31,6 +31,10 @@ Also, I was looking into [Remix](https://remix.run/) at that time so took this p
 - Currently powered by Binance API.
 - PWA enabled
 
+## Deployment 😼
+
+Check the [Self-Hosting](./SELF-HOSTING.md) guide for this
+
 ## Bugs or Requests 🐛
 
 If you encounter any problems feel free to open an [issue](https://github.com/AkashRajpurohit/cryptfolio/issues/new?template=bug_report.md). If you feel the project is missing a feature, please raise a [ticket](https://github.com/AkashRajpurohit/cryptfolio/issues/new?template=feature_request.md) on GitHub and I'll look into it. Pull request are also welcome.
