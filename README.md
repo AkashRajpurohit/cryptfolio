@@ -1,7 +1,7 @@
 <h1 align="center">
   Cryptfolio <img width="32" height="32" alt="Cryptfolio icon" src="./public/favicons/favicon-32x32.png" />
 	<br />
-	<small>A simplified view of your Crypto Portfolio.</small>
+	<p style='font-size: 16px; margin-top: 6px;'>A simplified view of your Crypto Portfolio.</p>
 </h1>
 
 <p align="center">
@@ -10,7 +10,7 @@
   <a href="https://github.com/AkashRajpurohit/cryptfolio/stargazers"><img src="https://img.shields.io/github/stars/AkashRajpurohit/cryptfolio" height="20"></a>
   <a href="https://github.com/AkashRajpurohit/cryptfolio/network/members"><img src="https://img.shields.io/github/forks/AkashRajpurohit/cryptfolio" height="20"></a>
   <a href="https://github.com/AkashRajpurohit/cryptfolio/issues?q=is%3Aopen+is%3Aissue"><img src="https://img.shields.io/github/issues/AkashRajpurohit/cryptfolio" height="20"></a>
-  <a href="https://github.com/AkashRajpurohit/cryptfolio/blob/master/LICENSE"><img src="https://img.shields.io/github/license/AkashRajpurohit/cryptfolio" height="20"></a>
+  <a href="https://github.com/AkashRajpurohit/cryptfolio/blob/main/LICENSE"><img src="https://img.shields.io/github/license/AkashRajpurohit/cryptfolio" height="20"></a>
   <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2FAkashRajpurohit%2Fcryptfolio"><img src="https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2FAkashRajpurohit%2Fcryptfolio" height="20"></a>
 </p>
 
