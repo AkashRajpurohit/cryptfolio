@@ -5,7 +5,7 @@
     "build:css": "tailwindcss -i ./styles/tailwind.css -o ./app/tailwind.css --minify",
     "dev": "concurrently \"npm run dev:css\" \"node -r dotenv/config ./node_modules/@remix-run/dev/cli.js\"",
     "dev:css": "tailwindcss -i ./styles/tailwind.css -o ./app/tailwind.css --watch",
-    "postinstall": "remix setup node",
+    "start": "remix-serve build",
     "gen-env-types": "gen-env-types .env --types-output env.d.ts --example-env-path . --rename-example-env .env.example"
   },
   "dependencies": {
@@ -13,7 +13,7 @@
     "@heroicons/react": "^1.0.5",
     "@remix-run/react": "^1.1.1",
     "@remix-run/serve": "^1.1.1",
-    "@remix-run/vercel": "^1.1.1",
+    "@remix-run/node": "^1.1.1",
     "@tailwindcss/forms": "^0.4.0",
     "axios": "^0.27.2",
     "dayjs": "^1.10.7",
