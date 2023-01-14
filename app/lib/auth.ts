@@ -12,12 +12,12 @@ export const validateCredentials = async ({
   }
 
   if (
-    process.env.AKASH_USER_ID &&
-    username === process.env.AKASH_USER_ID &&
-    process.env.AKASH_USER_PASSWORD &&
-    password === process.env.AKASH_USER_PASSWORD
+    process.env.USER_ID &&
+    username === process.env.USER_ID &&
+    process.env.USER_PASSWORD &&
+    password === process.env.USER_PASSWORD
   ) {
-    return process.env.AKASH_USER_ID;
+    return process.env.USER_ID;
   }
 
   return null;

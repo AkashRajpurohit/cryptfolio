@@ -2,21 +2,12 @@ import Binance from 'node-binance-api';
 import { IBalance, ICoin, IDeposit, IPortfolio, ITrade } from './types';
 import { blockedPairs, getAverage, transformDeposit, transformTrade } from './utils';
 
-export const getBinanceClient = (userId: string) => {
-  let API_KEY: string;
-  let API_SECRET: string;
-
-  switch (userId) {
-    case process.env.AKASH_USER_ID:
-      API_KEY = process.env.AKASH_BINANCE_API_KEY as string;
-      API_SECRET = process.env.AKASH_BINANCE_API_SECRET as string;
-      break;
-    default:
-      throw new Error('No API key found for this user');
-  }
+export const getBinanceClient = () => {
+  const API_KEY = process.env.BINANCE_API_KEY;
+  const API_SECRET = process.env.BINANCE_API_SECRET;
 
   if (!API_KEY || !API_SECRET) {
-    throw new Error('No API key found for this user');
+    throw new Error('Please add the BINANCE_API_KEY and BINANCE_API_SECRET credentials');
   }
 
   return new Binance().options({
@@ -130,9 +121,9 @@ export const getCurrentPrices = async ({ client }: { client: Binance }) => {
   return client.prices();
 };
 
-export const getPortfolio = async ({ userId }: { userId: string }) => {
+export const getPortfolio = async () => {
   try {
-    const client = getBinanceClient(userId);
+    const client = getBinanceClient();
 
     const { trades, usdtBalanceAvailable, usdtBalanceOnOrder } = await getAllTrades({ client });
     const deposits = await getUserDeposits({ client });

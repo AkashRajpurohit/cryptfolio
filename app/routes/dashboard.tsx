@@ -43,9 +43,8 @@ export const loader: LoaderFunction = async ({ request }) => {
   const userId = session.get('userId');
 
   const { portfolio, usdtBalanceAvailable, usdtBalanceOnOrder } =
-    await getPortfolio({
-      userId,
-    });
+    await getPortfolio();
+
   const kuCoinInfo = await getKucoinWSConnectionDetails();
 
   return json({
