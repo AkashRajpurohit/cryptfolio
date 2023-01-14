@@ -22,8 +22,11 @@ export const getBinanceClient = (userId: string) => {
   return new Binance().options({
     APIKEY: API_KEY,
     APISECRET: API_SECRET,
+    family: 4,
     useServerTime: true,
+    reconnect: true,
     recvWindow: 60000,
+    verbose: true,
   });
 };
 
