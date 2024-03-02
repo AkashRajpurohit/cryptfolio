@@ -116,9 +116,9 @@ const AssetsTable: FunctionComponent<IAssetsTableProps> = ({
                             <div className='flex-shrink-0 h-10 w-10'>
                               <img
                                 className='h-10 w-10 rounded-full'
-                                src={`https://cryptoicon-api-ten.vercel.app/api/icon/${formatSymbolName(
+                                src={`https://raw.githubusercontent.com/AkashRajpurohit/cryptoicon-api/master/public/icons/128/color/${formatSymbolName(
                                   symbol,
-                                ).toLowerCase()}`}
+                                ).toLowerCase()}.png`}
                                 alt={`${symbol} icon`}
                               />
                             </div>
